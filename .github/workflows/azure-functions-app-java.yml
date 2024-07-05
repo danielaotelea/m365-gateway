@@ -52,6 +52,10 @@ jobs:
           pushd './${{ env.POM_XML_DIRECTORY }}'
           mvn clean package
           popd
+      - name: 'Login via Azure CLI'
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_RBAC_CREDENTIALS }}
 
       - name: Terraform Setup and Apply
         run: |

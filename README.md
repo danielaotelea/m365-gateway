@@ -20,3 +20,10 @@ az ad sp create-for-rbac --name m365-functions --role contributor --scopes /subs
   "tenant": "b1219c7d-011e-406f-9f20-2ae04585450e"
 }
 
+If you are running this in a CI/CD pipeline, you will need to authenticate using a service principal. You can create a service principal and assign it the necessary permissions in Azure, then set the ARM_CLIENT_ID, ARM_CLIENT_SECRET, ARM_SUBSCRIPTION_ID, and ARM_TENANT_ID environment variables in your pipeline to the corresponding values of your service principal.
+
+env:
+ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+ARM_CLIENT_SECRET="~c18Q~iDiIYD_Yb4GsqxmfuT0vUjRpTtVMcmlc~T"
+ARM_SUBSCRIPTION_ID="3f366596-10fd-45c7-8882-a45e78b598b4"
+ARM_TENANT_ID: "b1219c7d-011e-406f-9f20-2ae04585450e"
