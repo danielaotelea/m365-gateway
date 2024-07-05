@@ -1,0 +1,13 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=m365functionsstorage;AccountKey=IfApk6Iht53C4bPOi1aqH8oQ9S57erwIfnXoG68btW+eCYflXSxoKspqXn0Q947epIqdWZhvQc1w+AStqFme+Q==;EndpointSuffix=core.windows.net",
+    "AzureWebJobsDashboard": "DefaultEndpointsProtocol=https;AccountName=m365functionsstorage;AccountKey=IfApk6Iht53C4bPOi1aqH8oQ9S57erwIfnXoG68btW+eCYflXSxoKspqXn0Q947epIqdWZhvQc1w+AStqFme+Q==;EndpointSuffix=core.windows.net",
+    "WEBSITE_RUN_FROM_PACKAGE": "https://m365functionsstorage.blob.core.windows.net/function-releases/20240705104019-5157776a-e227-48cc-8479-883cfd8f5feb.zip?st=2024-07-05T08%3A30%3A23Z&se=2034-06-23T08%3A40%3A23Z&sp=r&sv=2018-11-09&sr=b&sig=%2BUNaePh9J47ig%2BZ6ojpzpTaCyWkh3J%2BFUilSGTDV91s%3D",
+    "FUNCTIONS_EXTENSION_VERSION": "~4",
+    "APPINSIGHTS_INSTRUMENTATIONKEY": "f018e136-7916-4d3e-bb08-5e5d1833ac6d",
+    "FUNCTIONS_WORKER_RUNTIME": "java",
+    "WEBSITE_CONTENTSHARE": "m365-functions-4dbd",
+    "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING": "DefaultEndpointsProtocol=https;AccountName=m365functionsstorage;AccountKey=IfApk6Iht53C4bPOi1aqH8oQ9S57erwIfnXoG68btW+eCYflXSxoKspqXn0Q947epIqdWZhvQc1w+AStqFme+Q==;EndpointSuffix=core.windows.net"
+  }
+}

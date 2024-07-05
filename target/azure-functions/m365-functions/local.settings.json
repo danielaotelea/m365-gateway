@@ -1,0 +1,9 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=m365functionsstorage;AccountKey=IfApk6Iht53C4bPOi1aqH8oQ9S57erwIfnXoG68btW+eCYflXSxoKspqXn0Q947epIqdWZhvQc1w+AStqFme+Q==;EndpointSuffix=core.windows.net",
+    "AzureWebJobsDashboard": "DefaultEndpointsProtocol=https;AccountName=m365functionsstorage;AccountKey=IfApk6Iht53C4bPOi1aqH8oQ9S57erwIfnXoG68btW+eCYflXSxoKspqXn0Q947epIqdWZhvQc1w+AStqFme+Q==;EndpointSuffix=core.windows.net",
+    "FUNCTIONS_WORKER_RUNTIME": "java",
+    "APPINSIGHTS_INSTRUMENTATIONKEY": "f018e136-7916-4d3e-bb08-5e5d1833ac6d"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "scriptFile" : "../m365-functions-1.0-SNAPSHOT.jar",
+  "entryPoint" : "ch.vontobel.m365.TestJFunction.run",
+  "bindings" : [ {
+    "type" : "httpTrigger",
+    "direction" : "in",
+    "name" : "req",
+    "methods" : [ "GET", "POST" ],
+    "authLevel" : "ANONYMOUS"
+  }, {
+    "type" : "http",
+    "direction" : "out",
+    "name" : "$return"
+  } ]
+}
