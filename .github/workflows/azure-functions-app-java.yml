@@ -57,7 +57,7 @@ jobs:
         run: |
           terraform init
           terraform validate
-          terraform plan
+#          terraform plan
           terraform apply -auto-approve
         working-directory: ./iac
 
