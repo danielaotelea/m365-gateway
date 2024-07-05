@@ -10,7 +10,7 @@ az ad sp create-for-rbac --name "myApp" --role contributor \
 
 /subscription id =3f366596-10fd-45c7-8882-a45e78b598b4
 
-az ad sp create-for-rbac --name "myApp" --role contributor --scopes /subscriptions/3f366596-10fd-45c7-8882-a45e78b598b4/resourceGroups/m365-gateway
+az ad sp create-for-rbac --name m365-functions --role contributor --scopes /subscriptions/3f366596-10fd-45c7-8882-a45e78b598b4/resourceGroups/m365-gateway
 /providers/Microsoft.Web/sites/m365-functions --sdk-auth
 
 {
