@@ -60,6 +60,7 @@ jobs:
           terraform plan -out=plan-out -refresh-only >> OUT
         working-directory: ./iac
       - name: Comment on PR
+        if: github.event_name == 'pull_request'
         uses: actions/github-script@v5
         with:
           script: |
@@ -67,7 +68,7 @@ jobs:
             const repository = context.repo.repo;
             const owner = context.repo.owner;
             
-            const body = "Terraform Plan has been created. Please review the plan and approve the changes: ${{ steps.plan.outputs.plan }}";
+            const body = "Terraform Plan has been created. Please review the plan and approve the changes: $issue_number";
             
             github.rest.issues.createComment({
               issue_number: issue_number,
