@@ -52,7 +52,7 @@ jobs:
           mvn clean package
           popd
 
-      - name: Terraform Setup and Apply
+      - name: Terraform Setup and Plan
         run: |
           terraform init
           terraform fmt
@@ -76,7 +76,7 @@ jobs:
               body: body
             });
 
-      - name: Terraform Setup and Apply
+      - name: Terraform Apply
         run: terraform apply -auto-approve "plan-out"
         working-directory: ./iac
 
