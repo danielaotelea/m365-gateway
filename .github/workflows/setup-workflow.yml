@@ -58,8 +58,6 @@ jobs:
             const plan = `${{ steps.terraform.outputs.plan }}`;
             const body = `Terraform Plan has been created. Please review the plan and approve the changes: ${plan}`;
             
-            cat $OUT
-            
             github.rest.issues.createComment({
               issue_number: issue_number,
               owner: owner,
