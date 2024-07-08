@@ -45,7 +45,7 @@ jobs:
           terraform plan -out=plan-out -refresh-only > OUT
         working-directory: ./iac
       - name: Use Plan
-        run: echo "PLAN=$(cat ./iac/OUT)" >> $GITHUB_ENV
+        run: echo "PLAN=$(cat ./iac/OUT | tr '\n' ' ')" >> $GITHUB_ENV
         shell: bash
 
       - name: Comment on PR
