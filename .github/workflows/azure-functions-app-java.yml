@@ -56,8 +56,8 @@ jobs:
           terraform init
           terraform fmt
           terraform validate
-          terraform plan -out=plan-out 
-          terraform apply "plan-out" -refresh-only -auto-approve
+          terraform plan -out=plan-out -refresh
+          terraform apply -auto-approve "plan-out"
         working-directory: ./iac
 
       - name: 'Run Azure Functions Action'
