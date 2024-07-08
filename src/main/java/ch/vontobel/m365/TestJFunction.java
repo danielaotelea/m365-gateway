@@ -28,15 +28,15 @@ public class TestJFunction {
                     authLevel = AuthorizationLevel.ANONYMOUS) HttpRequestMessage<Optional<String>> request,
             final ExecutionContext context) {
         context.getLogger().info("Daniela Second HTTP trigger processed a request.");
-
-        // Parse query parameter
         String query = request.getQueryParameters().get("name");
         String name = request.getBody().orElse(query);
 
         if (name != null) {
             return request.createResponseBuilder(HttpStatus.OK).body("Hello, " + name).build();
         } else {
-            return request.createResponseBuilder(HttpStatus.OK).build();
+            return request.createResponseBuilder(HttpStatus.OK)
+                    .body("Hello, World!")
+                    .build();
         }
     }
 }

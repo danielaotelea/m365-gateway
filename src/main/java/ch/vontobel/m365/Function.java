@@ -25,7 +25,6 @@ public class Function {
             final ExecutionContext context) {
         context.getLogger().info("[Success][InitTest]Java HTTP trigger processed a request.");
 
-        // Parse query parameter
         final String query = request.getQueryParameters().get("name");
         final String name = request.getBody().orElse(query);
 
