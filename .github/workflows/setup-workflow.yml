@@ -44,14 +44,9 @@ jobs:
           terraform validate
           terraform plan -out=plan-out -refresh-only > OUT
         working-directory: ./iac
-
       - name: Use Plan
-        run: |
-          echo "PLAN=$(cat OUT)" >> $GITHUB_ENV
-          echo "Plan: $PLAN"
-        env:
-          PLAN: ${{ steps.terraform.outputs.plan }}
-        working-directory: ./iac
+        run: echo "PLAN=$(cat ./iac/OUT)" >> $GITHUB_ENV
+        shell: bash
 
       - name: Comment on PR
         if: github.event_name == 'pull_request'
