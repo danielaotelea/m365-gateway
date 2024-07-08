@@ -70,3 +70,5 @@ jobs:
               repo: repository,
               body: body
             });
+        env:
+          PLAN: ${{ env.PLAN }}
