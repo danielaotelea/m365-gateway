@@ -56,7 +56,7 @@ jobs:
           terraform init
           terraform fmt
           terraform validate
-          terraform plan -out=plan-out -refresh
+          terraform plan -out=plan-out -refresh-only
           terraform apply -auto-approve "plan-out"
         working-directory: ./iac
 
