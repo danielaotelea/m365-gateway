@@ -3,7 +3,7 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "example" {
-  name     = "m365-gateway"
+  name     = "m365-gateway-git"
   location = "westeurope"
 }
 

@@ -54,7 +54,9 @@ jobs:
       - name: Terraform Setup and Apply
         run: |
           terraform init
+          terraform fmt
           terraform validate
+          terraform plan
           terraform apply -auto-approve
         working-directory: ./iac
 
