@@ -1,0 +1,66 @@
+name: Setup Workflow
+
+on:
+  push:
+    branches-ignore:
+      - 'main'
+  pull_request:
+    types: [ opened, synchronize ]
+
+env:
+  AZURE_FUNCTIONAPP_NAME: 'm365-functions'
+  POM_XML_DIRECTORY: '.'
+  JAVA_VERSION: '17'
+  ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+  ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+  ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+  ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment: dev
+    steps:
+      - name: 'Checkout GitHub Action'
+        uses: actions/checkout@v4
+
+      - name: Setup Java Sdk ${{ env.JAVA_VERSION }}
+        uses: actions/setup-java@v1
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+
+      - name: 'Restore Project Dependencies Using Mvn'
+        shell: pwsh
+        run: |
+          pushd './${{ env.POM_XML_DIRECTORY }}'
+          mvn clean package
+          popd
+
+      - name: Terraform Setup and Plan
+        id: terraform
+        run: |
+          terraform init
+          terraform fmt
+          terraform validate
+          terraform plan -out=plan-out -refresh-only > OUT
+          echo "::set-output name=plan::$(cat OUT)"
+        working-directory: ./iac
+
+      - name: Comment on PR
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v5
+        with:
+          script: |
+            const issue_number = context.issue.number;
+            const repository = context.repo.repo;
+            const owner = context.repo.owner;
+            
+            const plan = `${{ steps.terraform.outputs.plan }}`;
+            const body = `Terraform Plan has been created. Please review the plan and approve the changes: ${plan}`;
+            
+            github.rest.issues.createComment({
+              issue_number: issue_number,
+              owner: owner,
+              repo: repository,
+              body: body
+            });
