@@ -68,10 +68,7 @@ jobs:
             const repository = context.repo.repo;
             const owner = context.repo.owner;
             
-            const body = "Terraform Plan has been created. Please review the plan and approve the changes.
-            \n\n
-            ${{ steps.plan.outputs.plan }}
-            \n\n";
+            const body = "Terraform Plan has been created. Please review the plan and approve the changes: ${{ steps.plan.outputs.plan }}";
             
             github.rest.issues.createComment({
               issue_number: issue_number,
