@@ -6,6 +6,9 @@ on:
       - 'main'
   pull_request:
     types: [ opened, synchronize ]
+permissions:
+  issues: write
+  pull-requests: write
 
 env:
   AZURE_FUNCTIONAPP_NAME: 'm365-functions'
