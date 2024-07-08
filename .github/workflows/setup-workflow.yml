@@ -17,7 +17,7 @@ env:
   ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
     environment: dev
     steps:
@@ -57,8 +57,8 @@ jobs:
             const issue_number = context.issue.number;
             const repository = context.repo.repo;
             const owner = context.repo.owner;
-            
-            const body = `Terraform Plan has been created. Please review the plan and approve the changes: ${ PLAN }`;
+            const plan = core.getInput('plan');
+            const body = `Terraform Plan has been created. Please review the plan and approve the changes: ${ plan }`;
             
             github.rest.issues.createComment({
               issue_number: issue_number,
