@@ -42,7 +42,7 @@ jobs:
           terraform init
           terraform fmt
           terraform validate
-          terraform plan -out=plan-out -refresh-only > OUT
+          terraform plan -no-color -out=plan-out -refresh-only > OUT
         working-directory: ./iac
       - name: Use Plan
         run: echo "PLAN=$(cat ./iac/OUT)" >> $GITHUB_ENV
