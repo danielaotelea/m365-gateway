@@ -1,9 +1,6 @@
 name: Setup Workflow
 
 on:
-  push:
-    branches-ignore:
-      - 'main'
   pull_request:
     types: [ opened, synchronize ]
 permissions:
@@ -46,9 +43,11 @@ jobs:
           terraform fmt
           terraform validate
           terraform plan -out=plan-out -refresh-only > OUT
-          echo "::set-output name=plan::$(cat OUT)"
+          echo "PLAN=$(cat OUT)" >> $GITHUB_ENV
         working-directory: ./iac
-
+      - name: Use Plan
+        run: |
+          echo "Plan: $PLAN"
       - name: Comment on PR
         if: github.event_name == 'pull_request'
         uses: actions/github-script@v5
@@ -59,7 +58,7 @@ jobs:
             const owner = context.repo.owner;
             
             const plan = `${{ steps.terraform.outputs.plan }}`;
-            const body = `Terraform Plan has been created. Please review the plan and approve the changes: ${plan}`;
+            const body = `Terraform Plan has been created. Please review the plan and approve the changes: $PLAN`;
             
             github.rest.issues.createComment({
               issue_number: issue_number,
