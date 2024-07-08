@@ -52,18 +52,17 @@ jobs:
         if: github.event_name == 'pull_request'
         uses: actions/github-script@v5
         with:
+          plan: ${{ env.PLAN }}
           script: |
             const issue_number = context.issue.number;
             const repository = context.repo.repo;
             const owner = context.repo.owner;
             
-            const body = `Terraform Plan has been created. Please review the plan and approve the changes: ${ env.PLAN }`;
+            const body = `Terraform Plan has been created. Please review the plan and approve the changes: ${ PLAN }`;
             
             github.rest.issues.createComment({
               issue_number: issue_number,
               owner: owner,
               repo: repository,
               body: body
-            });
-        env:
-          PLAN: ${{ env.PLAN }}
+            })
