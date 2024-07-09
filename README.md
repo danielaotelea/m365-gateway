@@ -32,3 +32,19 @@ az ad sp create-for-rbac --name "myApp" --role contributor --scopes /subscriptio
 
 
 https://github.com/hashicorp/terraform-provider-azurerm/tree/main/examples/virtual-networks
+
+
+Terraform Important files:
+The _terraform.lock.hcl_ file should be stored in 
+the same directory as your Terraform configuration files 
+(.tf files). This file is automatically created and updated by Terraform when you run terraform init. It's used to ensure 
+that the same provider versions are used across all machines.  
+This file should be committed to your version control system (like Git)
+to ensure that all team members and your deployment systems use the same provider versions. 
+This helps to avoid inconsistencies that could occur if different versions of providers are used.
+
+
+The _terraform.tfstate_ file should be stored in a remote location.
+Terraform supports storing state in a remote backend, such as Azure Storage. 
+Remote storage provides benefits like state locking, consistency checking, and team collaboration.
+The state file contains sensitive information, so it should be stored securely.
