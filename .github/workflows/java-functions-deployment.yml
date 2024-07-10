@@ -60,7 +60,7 @@ jobs:
 
       - name: Terraform Plan
         run: |
-          terraform plan -out=tfplan
+          terraform plan -out=tfplan -refresh-only
         working-directory: ./infrastructure
 
       - name: Terraform Apply
