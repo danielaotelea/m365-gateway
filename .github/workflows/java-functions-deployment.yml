@@ -67,7 +67,7 @@ jobs:
         run: terraform apply -auto-approve tfplan
         working-directory: ./infrastructure
 
-      - name: 'Run Azure Functions Action'
+      - name: 'Run Java Azure Functions Action'
         uses: Azure/functions-action@v1
         id: fa
         with:
@@ -79,9 +79,9 @@ jobs:
       - name: 'Checkout GitHub Action'
         uses: actions/checkout@v3
 
-      - name: 'Run Azure Functions Action'
+      - name: 'Run Powershell Azure Functions Action'
         uses: Azure/functions-action@v1
-        id: fa
+        id: fa-powershell
         with:
           app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
           package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
