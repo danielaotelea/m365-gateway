@@ -1,3 +1,7 @@
+# Provider Configuration
+provider "azurerm" {
+  features {}
+}
 # Resource Definitions
 resource "azurerm_resource_group" "example" {
   name     = local.resource_group_name
@@ -27,12 +31,13 @@ resource "azurerm_application_insights" "example" {
   application_type    = "web"
 }
 
-resource "azurerm_log_analytics_workspace" "example" {
-  location            = local.log_analytics_workspace_name
-  name                = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
-  retention_in_days   = 30
-}
+# Not supported in the current area
+#resource "azurerm_log_analytics_workspace" "example" {
+#  location            = local.log_analytics_workspace_name
+#  name                = azurerm_resource_group.example.location
+#  resource_group_name = azurerm_resource_group.example.name
+#  retention_in_days   = 30
+#}
 
 
 resource "azurerm_linux_function_app" "example" {

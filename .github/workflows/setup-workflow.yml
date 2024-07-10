@@ -17,7 +17,7 @@ env:
   ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
 
 jobs:
-  build:
+  build-and-plan:
     runs-on: ubuntu-latest
     environment: dev
     steps:
@@ -42,10 +42,13 @@ jobs:
           terraform init
           terraform fmt
           terraform validate
-          terraform plan -no-color -out=plan-out -refresh-only > OUT
+          terraform plan -out tfplan 
+          terraform show -no-color tfplan | tee terraform-plan.txt
+          terraform show -json tfplan > terraform-plan.json
+#          terraform plan -no-color -out=plan-out -refresh-only > OUT
         working-directory: ./iac
       - name: Use Plan
-        run: echo "PLAN=$(cat ./iac/OUT)" >> $GITHUB_ENV
+        run: echo "PLAN=$(cat ./iac/terraform-plan.json)" >> $GITHUB_ENV
         shell: bash
 
       - name: Comment on PR
