@@ -1,4 +1,4 @@
-name: Java Functions Validate
+name: Functions Validate
 
 on:
   pull_request:

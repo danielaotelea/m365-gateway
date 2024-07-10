@@ -4,12 +4,14 @@ on:
   push:
     branches:
       - 'main'
-  pull_request:
-    types: [ closed ]
 
 env:
   AZURE_FUNCTIONAPP_NAME: 'm365-java-functions'   # set this to your function app name on Azure
   AZURE_FUNCTIONAPP_PACKAGE_PATH: 'powershell-functions'       # set this to the path to your function app project, defaults to the repository root
+  ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+  ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+  ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+  ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
 
 jobs:
   build-and-deploy:
