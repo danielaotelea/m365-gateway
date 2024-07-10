@@ -20,8 +20,10 @@ name: Deploy Java project to Azure Function App
 
 on:
   push:
+    branches:
+      - 'main'
   pull_request:
-    types: [ opened, ready_for_review ]
+    types: [ closed ]
 
 env:
   AZURE_FUNCTIONAPP_NAME: 'm365-functions'   # set this to your function app name on Azure
@@ -52,33 +54,19 @@ jobs:
           mvn clean package
           popd
 
-      - name: Terraform Setup and Plan
+      - name: Terraform Init
         run: |
           terraform init
-          terraform fmt
-          terraform validate
-          terraform plan -out=plan-out -refresh-only >> OUT
-        working-directory: ./iac
-      - name: Comment on PR
-        uses: actions/github-script@v5
-        with:
-          script: |
-            const issue_number = context.issue.number;
-            const repository = context.repo.repo;
-            const owner = context.repo.owner;
-            
-            const body = "Terraform Plan has been created. Please review the plan and approve the changes: ${{ steps.plan.outputs.plan }}";
-            
-            github.rest.issues.createComment({
-              issue_number: issue_number,
-              owner: owner,
-              repo: repository,
-              body: body
-            });
+        working-directory: ./infrastructure
+
+      - name: Terraform Plan
+        run: |
+          terraform plan -out=plan-out -refresh-only
+        working-directory: ./infrastructure
 
       - name: Terraform Apply
         run: terraform apply -auto-approve "plan-out"
-        working-directory: ./iac
+        working-directory: ./infrastructure
 
       - name: 'Run Azure Functions Action'
         uses: Azure/functions-action@v1
