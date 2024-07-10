@@ -35,6 +35,7 @@ jobs:
           pushd './${{ env.POM_XML_DIRECTORY }}'
           mvn clean package
           popd
+        working-directory: java-functions
 
       - name: Terraform Setup and Plan
         id: terraform
