@@ -26,8 +26,8 @@ on:
     types: [ closed ]
 
 env:
-  AZURE_FUNCTIONAPP_NAME: 'm365-functions'   # set this to your function app name on Azure
-  POM_XML_DIRECTORY: '.'                    # set this to the directory which contains pom.xml file
+  AZURE_FUNCTIONAPP_NAME: 'm365-java-functions'   # set this to your function app name on Azure
+  POM_XML_DIRECTORY: '.'        # set this to the directory which contains pom.xml file
   JAVA_VERSION: '17'                         # set this to the java version to use (e.g. '8', '11', '17')
   ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
   ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
@@ -53,6 +53,7 @@ jobs:
           pushd './${{ env.POM_XML_DIRECTORY }}'
           mvn clean package
           popd
+        working-directory: java-functions
 
       - name: Terraform Init
         run: |
