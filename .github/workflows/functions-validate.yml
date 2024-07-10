@@ -43,7 +43,7 @@ jobs:
           terraform init
           terraform fmt
           terraform validate
-          terraform plan -out tfplan 
+          terraform plan -out tfplan -refresh-only
           terraform show -no-color tfplan | tee terraform-plan.txt
           terraform show -json tfplan > terraform-plan.json
 #          terraform plan -no-color -out=plan-out -refresh-only > OUT
