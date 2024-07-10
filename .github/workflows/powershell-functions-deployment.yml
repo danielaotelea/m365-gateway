@@ -21,16 +21,6 @@ jobs:
       - name: 'Checkout GitHub Action'
         uses: actions/checkout@v3
 
-      - name: Terraform Init
-        run: |
-          terraform init
-        working-directory: ./infrastructure
-
-      - name: Terraform Plan
-        run: |
-          terraform plan -out=tfplan -refresh-only
-        working-directory: ./infrastructure
-
       - name: Terraform Apply
         run: terraform apply -auto-approve tfplan
         working-directory: ./infrastructure
