@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - 'main'
-  pull_request:
-    types: [ closed ]
 
 env:
   AZURE_FUNCTIONAPP_NAME: 'm365-java-functions'   # set this to your function app name on Azure
