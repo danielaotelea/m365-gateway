@@ -61,11 +61,11 @@ jobs:
 
       - name: Terraform Plan
         run: |
-          terraform plan -out=plan-out -refresh-only
+          terraform plan -out=tfplan
         working-directory: ./infrastructure
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve "plan-out"
+        run: terraform apply -auto-approve tfplan
         working-directory: ./infrastructure
 
       - name: 'Run Azure Functions Action'
