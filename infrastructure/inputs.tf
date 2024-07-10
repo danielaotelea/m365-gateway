@@ -5,7 +5,7 @@ locals {
   service_plan_name            = "m365-app-service-plan"
   application_insights_name    = "m365-app-insights"
   log_analytics_workspace_name = "m365-log-analytics"
-  function_app_name            = "m365-functions"
+  function_app_name            = "m365-java-functions"
   functions_extension_version  = "~4"
   java_version                 = "17"
 }

@@ -11,9 +11,9 @@ az ad sp create-for-rbac --name "myApp" --role contributor \
 
 /subscription id =3f366596-10fd-45c7-8882-a45e78b598b4
 
-az ad sp create-for-rbac --name m365-functions --role contributor --scopes
+az ad sp create-for-rbac --name m365-java-functions --role contributor --scopes
 /subscriptions/3f366596-10fd-45c7-8882-a45e78b598b4/resourceGroups/m365-gateway
-/providers/Microsoft.Web/sites/m365-functions --sdk-auth
+/providers/Microsoft.Web/sites/m365-java-functions --sdk-auth
 
 {
 "appId": "fe4d279b-3296-4364-addf-4935c5b09bc6",
@@ -70,3 +70,8 @@ SKU = Stock Keeping Unit
 In the context of the log Analytics workplace, the SKU is the pricing tier of the workplace.
 The "PerGB2018" SKU is the default pricing tier for the workspace - the pricing tier charges based on the amount of data
 ingested into the workspace and the data retention configuration.
+
+
+Github Actions to deploy to Azure
+https://github.com/Azure/actions-workflow-samples/tree/master
+
