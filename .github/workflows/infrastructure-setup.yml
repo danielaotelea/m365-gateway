@@ -4,15 +4,15 @@ on:
     branches:
       - 'main'
 env:
-  POM_XML_DIRECTORY: 'java-functions'        # set this to the directory which contains pom.xml file
-  JAVA_VERSION: '17'                         # set this to the java version to use (e.g. '8', '11', '17')
+  POM_XML_DIRECTORY: 'java-functions'
+  JAVA_VERSION: '17'
   ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
   ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
   ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
   ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
 
 jobs:
-  build-and-deploy:
+  setup-infrastructure-and-build:
     runs-on: ubuntu-latest
     environment: dev
     steps:
@@ -27,6 +27,7 @@ jobs:
           pushd './${{ env.POM_XML_DIRECTORY }}'
           mvn clean package
           popd
+        working-directory: java-functions
 
       - name: Terraform Init
         run: |
