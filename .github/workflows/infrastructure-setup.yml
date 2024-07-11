@@ -1,21 +1,27 @@
-name: Infrastructure Setup
+name: Infra Setup GO Back
+
 on:
   push:
     branches:
       - 'main'
 env:
-  JAVA_VERSION: '17'
-  POM_XML_DIRECTORY: '.'
+  AZURE_FUNCTIONAPP_NAME: 'm365-java-functions'   # set this to your function app name on Azure
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: 'powershell-functions'
+  POM_XML_DIRECTORY: 'java-functions'        # set this to the directory which contains pom.xml file
+  JAVA_VERSION: '17'                         # set this to the java version to use (e.g. '8', '11', '17')
   ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
   ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
   ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
   ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
 
 jobs:
-  setup-infrastructure-build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     environment: dev
     steps:
+      - name: 'Checkout GitHub Action'
+        uses: actions/checkout@v4
+
       - name: Setup Java Sdk ${{ env.JAVA_VERSION }}
         uses: actions/setup-java@v1
         with:
@@ -24,20 +30,19 @@ jobs:
       - name: 'Restore Project Dependencies Using Mvn'
         shell: pwsh
         run: |
+          pushd './${{ env.POM_XML_DIRECTORY }}'
           mvn clean package
           popd
-        working-directory: java-functions
+      - name: Terraform Init
+        run: |
+          terraform init
+        working-directory: ./infrastructure
 
-#      - name: Terraform Init
-#        run: |
-#          terraform init
-#        working-directory: ./infrastructure
-#
-#      - name: Terraform Plan
-#        run: |
-#          terraform plan -out=tfplan -refresh-only
-#        working-directory: ./infrastructure
-#
-#      - name: Terraform Apply
-#        run: terraform apply -auto-approve tfplan
-#        working-directory: ./infrastructure
+      - name: Terraform Plan
+        run: |
+          terraform plan -out=tfplan -refresh-only
+        working-directory: ./infrastructure
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve tfplan
+        working-directory: ./infrastructure
