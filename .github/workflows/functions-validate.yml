@@ -44,24 +44,28 @@ jobs:
           popd
         working-directory: java-functions
 
+      - name: Run PSScriptAnalyzer
+        uses: microsoft/psscriptanalyzer-action@v1.0
+        with:
+          path: powershell-functions
+          recurse: true
+          output: results.sarif
+
       - name: Terraform Setup and Plan
         id: terraform
         run: |
           terraform init
           terraform fmt
           terraform validate
-          terraform plan -out tfplan
-          terraform show -no-color tfplan | tee terraform-plan.txt
-          terraform show -json tfplan > terraform-plan.json
-        #          terraform plan -no-color -out=plan-out -refresh-only > OUT
+          terraform plan -no-color -out=plan-out > OUT
         working-directory: ./infrastructure
       - name: Use Plan
-        run: echo "PLAN=$(cat ./infrastructure/terraform-plan.json)" >> $GITHUB_ENV
+        run: echo "PLAN=$(cat ./infrastructure/OUT)" >> $GITHUB_ENV
         shell: bash
 
       - name: Comment on PR
         if: github.event_name == 'pull_request'
-        uses: actions/github-script@v5
+        uses: actions/github-script@v7
         with:
           plan: ${{ env.PLAN }}
           script: |
@@ -69,7 +73,8 @@ jobs:
             const repository = context.repo.repo;
             const owner = context.repo.owner;
             const plan = core.getInput('plan');
-            const body = `Terraform Plan has been created. Please review the plan and approve the changes: ${ plan }`;
+            const body = `Terraform Plan has been created. Please review the plan and approve the changes: 
+            ${ plan }`;
             
             github.rest.issues.createComment({
               issue_number: issue_number,
