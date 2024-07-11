@@ -5,7 +5,7 @@ on:
       - 'main'
 env:
   JAVA_VERSION: '17'
-  POM_XML_DIRECTORY: 'java-functions'
+  POM_XML_DIRECTORY: '.'
   ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
   ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
   ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
@@ -27,6 +27,7 @@ jobs:
           pushd './${{ env.POM_XML_DIRECTORY }}'
           mvn clean package
           popd
+        working-directory: ./java-functions
 
 #      - name: Terraform Init
 #        run: |
