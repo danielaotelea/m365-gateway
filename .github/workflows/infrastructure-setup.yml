@@ -23,20 +23,24 @@ jobs:
       - name: 'Restore Project Dependencies Using Mvn'
         shell: pwsh
         run: |
+          pwd
+          echo "and the current directory is"
+          ls -la
+          echo "-----------"
           pushd './java-functions'
           mvn clean package
           popd
 
-      - name: Terraform Init
-        run: |
-          terraform init
-        working-directory: ./infrastructure
-
-      - name: Terraform Plan
-        run: |
-          terraform plan -out=tfplan -refresh-only
-        working-directory: ./infrastructure
-
-      - name: Terraform Apply
-        run: terraform apply -auto-approve tfplan
-        working-directory: ./infrastructure
+#      - name: Terraform Init
+#        run: |
+#          terraform init
+#        working-directory: ./infrastructure
+#
+#      - name: Terraform Plan
+#        run: |
+#          terraform plan -out=tfplan -refresh-only
+#        working-directory: ./infrastructure
+#
+#      - name: Terraform Apply
+#        run: terraform apply -auto-approve tfplan
+#        working-directory: ./infrastructure
