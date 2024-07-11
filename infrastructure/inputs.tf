@@ -6,6 +6,7 @@ locals {
   application_insights_name    = "m365-app-insights"
   log_analytics_workspace_name = "m365-log-analytics"
   function_app_name            = "m365-java-functions"
+  container_name               = "m365-gateway-container"
   functions_extension_version  = "~4"
   java_version                 = "17"
 }
