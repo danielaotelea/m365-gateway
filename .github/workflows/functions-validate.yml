@@ -60,7 +60,7 @@ jobs:
           terraform plan -no-color -out=plan-out -refresh-only > OUT
         working-directory: ./infrastructure
       - name: Use Plan
-        run: echo "PLAN=$(cat ./infrastructure/terraform-plan.json)" >> $GITHUB_ENV
+        run: echo "PLAN=$(cat ./infrastructure/plan-out)" >> $GITHUB_ENV
         shell: bash
 
       - name: Comment on PR
