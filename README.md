@@ -75,3 +75,7 @@ ingested into the workspace and the data retention configuration.
 Github Actions to deploy to Azure
 https://github.com/Azure/actions-workflow-samples/tree/master
 
+
+>>
+> https://learn.microsoft.com/en-us/azure/azure-functions/functions-how-to-github-actions?tabs=windows%2Cdotnet&pivots=method-template
+
