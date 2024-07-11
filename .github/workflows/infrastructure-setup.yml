@@ -9,9 +9,10 @@ env:
   ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
   ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
   ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+  POM_XML_DIRECTORY: 'java-functions'
 
 jobs:
-  setup-infrastructure-and-mvn-build:
+  setup-infrastructure-build:
     runs-on: ubuntu-latest
     environment: dev
     steps:
@@ -30,6 +31,14 @@ jobs:
           pushd './java-functions'
           mvn clean package
           popd
+
+      - name: 'Restore Project Dependencies Using Mvn'
+        shell: pwsh
+        run: |
+          pushd './${{ env.POM_XML_DIRECTORY }}'
+          mvn clean package
+          popd
+        working-directory: java-functions
 
 #      - name: Terraform Init
 #        run: |
