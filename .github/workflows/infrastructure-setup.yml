@@ -27,7 +27,7 @@ jobs:
           pushd './${{ env.POM_XML_DIRECTORY }}'
           mvn clean package
           popd
-        working-directory: ./java-functions
+        working-directory: java-functions
 
 #      - name: Terraform Init
 #        run: |
