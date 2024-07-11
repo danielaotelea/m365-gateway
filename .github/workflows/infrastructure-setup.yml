@@ -24,7 +24,7 @@ jobs:
       - name: 'Restore Project Dependencies Using Mvn'
         shell: pwsh
         run: |
-          pushd './${{ env.POM_XML_DIRECTORY }}'
+          pushd './java-functions'
           mvn clean package
           popd
 
