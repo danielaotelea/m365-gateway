@@ -44,6 +44,13 @@ jobs:
           popd
         working-directory: java-functions
 
+      - name: Run PSScriptAnalyzer
+        uses: microsoft/psscriptanalyzer-action@v1.0
+        with:
+          path: powershell-functions
+          recurse: true
+          output: results.sarif
+
       - name: Terraform Setup and Plan
         id: terraform
         run: |
