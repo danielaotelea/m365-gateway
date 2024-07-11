@@ -67,13 +67,10 @@ resource "azurerm_linux_function_app" "example2" {
   storage_account_access_key  = azurerm_storage_account.example.primary_access_key
   service_plan_id             = azurerm_service_plan.example.id
   functions_extension_version = local.functions_extension_version
-  site_config {
-    application_stack {
-      java_version = local.java_version
-    }
-  }
-  app_settings = {
-    "APPINSIGHTS_INSTRUMENTATIONKEY" = azurerm_application_insights.example.instrumentation_key
+  app_settings                = {
+    "FUNCTIONS_WORKER_RUNTIME"         = "powershell"
+    "FUNCTIONS_WORKER_RUNTIME_VERSION" = "7.0"
+    "APPINSIGHTS_INSTRUMENTATIONKEY"   = azurerm_application_insights.example.instrumentation_key
   }
   depends_on = [azurerm_storage_account.example]
 }
