@@ -13,9 +13,11 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>17</java.version>
+        <fmt.version>2.23</fmt.version>
         <azure.functions.maven.plugin.version>1.24.0</azure.functions.maven.plugin.version>
         <azure.functions.java.library.version>2.2.0</azure.functions.java.library.version>
         <functionAppName>m365-java-functions</functionAppName>
+        <detekt.version>1.23.5</detekt.version>
     </properties>
 
     <dependencies>
@@ -51,6 +53,34 @@
                     <target>${java.version}</target>
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.spotify.fmt</groupId>
+                <artifactId>fmt-maven-plugin</artifactId>
+                <version>${fmt.version}</version>
+                <executions>
+                    <execution>
+                        <id>check-java</id>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <phase>validate</phase>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.github.ozsie</groupId>
+                <artifactId>detekt-maven-plugin</artifactId>
+                <version>${detekt.version}</version>
+                <executions>
+                    <execution>
+                        <id>detekt</id>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <phase>validate</phase>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>com.microsoft.azure</groupId>

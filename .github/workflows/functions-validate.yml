@@ -36,6 +36,14 @@ jobs:
           popd
         working-directory: java-functions
 
+      - name: 'Run Tests'
+        shell: pwsh
+        run: |
+          pushd './${{ env.POM_XML_DIRECTORY }}'
+          mvn test
+          popd
+        working-directory: java-functions
+
       - name: Terraform Setup and Plan
         id: terraform
         run: |
@@ -45,7 +53,7 @@ jobs:
           terraform plan -out tfplan
           terraform show -no-color tfplan | tee terraform-plan.txt
           terraform show -json tfplan > terraform-plan.json
-#          terraform plan -no-color -out=plan-out -refresh-only > OUT
+        #          terraform plan -no-color -out=plan-out -refresh-only > OUT
         working-directory: ./infrastructure
       - name: Use Plan
         run: echo "PLAN=$(cat ./infrastructure/terraform-plan.json)" >> $GITHUB_ENV
