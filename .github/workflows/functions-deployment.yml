@@ -1,9 +1,10 @@
 name: Deploy Java project to Azure Function App
 
 on:
-  pull_request:
-    types:
-      - closed
+  push:
+    branches:
+      - main
+
 env:
   AZURE_FUNCTION_PS_NAME: 'm365-powershell-functions'
   AZURE_FUNCTION_JAVA_NAME: 'm365-java-functions'   # set this to your function app name on Azure
