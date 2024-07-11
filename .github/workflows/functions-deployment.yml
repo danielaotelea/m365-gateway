@@ -5,8 +5,9 @@ on:
     types:
       - closed
 env:
-  AZURE_FUNCTIONAPP_NAME: 'm365-java-functions'   # set this to your function app name on Azure
-  AZURE_FUNCTIONAPP_PACKAGE_PATH_PS: 'powershell-functions'
+  AZURE_FUNCTION_PS_NAME: 'm365-powershell-functions'
+  AZURE_FUNCTION_JAVA_NAME: 'm365-java-functions'   # set this to your function app name on Azure
+  AZURE_FUNCTION_PACKAGE_PATH_PS: 'powershell-functions'
   POM_XML_DIRECTORY: 'java-functions'        # set this to the directory which contains pom.xml file
   JAVA_VERSION: '17'                         # set this to the java version to use (e.g. '8', '11', '17')
   ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
@@ -37,7 +38,7 @@ jobs:
         uses: Azure/functions-action@v1
         id: fa
         with:
-          app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
+          app-name: ${{ env.AZURE_FUNCTION_JAVA_NAME }}
           package: '${{ env.POM_XML_DIRECTORY }}'
           publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
           respect-pom-xml: true
@@ -49,6 +50,6 @@ jobs:
         uses: Azure/functions-action@v1
         id: fa-powershell
         with:
-          app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
-          package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH_PS }}
+          app-name: ${{ env.AZURE_FUNCTION_PS_NAME }}
+          package: ${{ env.AZURE_FUNCTION_PACKAGE_PATH_PS }}
           publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
