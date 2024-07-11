@@ -1,5 +1,5 @@
 locals {
-  resource_group_name          = "m365-gateway-rg"
+  resource_group_name          = "m365-gateway-rg-1"
   resource_group_location      = "westeurope"
   storage_account_name         = "m365storageaccount"
   service_plan_name            = "m365-app-service-plan"

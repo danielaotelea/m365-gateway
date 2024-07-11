@@ -8,7 +8,6 @@ permissions:
   pull-requests: write
 
 env:
-  AZURE_FUNCTIONAPP_NAME: 'm365-java-functions'
   POM_XML_DIRECTORY: '.'
   JAVA_VERSION: '17'
   ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
