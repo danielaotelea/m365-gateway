@@ -72,9 +72,7 @@ resource "azurerm_linux_function_app" "example2" {
     "FUNCTIONS_WORKER_RUNTIME_VERSION" = "7.0"
     "APPINSIGHTS_INSTRUMENTATIONKEY"   = azurerm_application_insights.example.instrumentation_key
   }
-  site_config {
-    linux_fx_version = "Powershell|7.0"
-  }
+  site_config {}
   depends_on = [azurerm_storage_account.example]
 }
 
